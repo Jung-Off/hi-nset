@@ -1,0 +1,49 @@
+import { Controller, Get, Post } from '@nestjs/common';
+import { AppService } from './app.service';
+
+// controllers : url로 요청을 받아.
+
+@Controller()
+export class AppController {
+  constructor(private readonly appService: AppService) {}
+
+  //get 데코레이터! (express의 get router)
+  @Get()
+  getHello(): string {
+    return this.appService.getHello(); // 서비스를 참조하고 있다!,, 왜 필요한건데?
+    // 구조와 아키텍처에 대해서 얘기하기!
+    // nestjs 콘트롤러를 비지니스 로직이랑 구분!
+    // 컨트롤러는 url을 가져오는 역할, function을 실행하는 정도!
+    // 나머지 비지니스 로직은 서비스로!
+    // 서비스는 일반적으로 실제로 function을 가지는 부분!
+  }
+
+  
+
+  // 여기서는 url은 "/hello"
+  // @Get("/hello")
+  @Post("/hello")
+  sayHello():string {
+    // 그러고 나서 함수를 실행할 거야!
+    // return "Hello everyone";
+    return this.appService.getHi();
+  }
+  // 여기 보이는 데코레이터 덕분에 nextjs는 누군가가 hello로 들어오면
+  // sayhello라는 함수를 실행해야 한다는 걸 알 고 있다
+
+  //데코레이터는 꾸며주는 함수나 클래스랑 붙어있어야 돼!
+}
+
+// 컨트롤러는 express.js의 controller/router 같은 것!
+// express.js에서는 라우터에서 app.get이라고 쓰고 함수를 씀!
+// @Get('hello')라고 하는 것만 빼면 비슷함!
+
+//sayhello라고 쓰면 끝!
+
+// url을 함수로 매핑! /hello 가 sayhello함수 실행!
+// nestjs의 마법 덕분에 라우터를 세팅하지 않아도 돼!
+
+//@get이라고 하는 것 만으로 get리퀘스트를 얻을 수 있다!
+
+// url가져오고 function을 리턴!
+// 이 function을 놓는 곳이 service;

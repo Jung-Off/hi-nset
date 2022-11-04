@@ -1,0 +1,23 @@
+import { Module } from '@nestjs/common';
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
+
+// 하나의 모듈에서 어플리케이션을 생성
+// Appmodule 모든 것의 루트 모듈
+// 모듈 > 어플리케이션의 일부분 > 한가지 역할을 하는 앱
+// 인증을 담당하는 어플리케이션이 있다면, users모듈!
+// 인스타그램의 photos 모듈, videos모듈!
+
+// controllers : url을 가져오고 함수를 실행! (express 라우터)
+// providers :
+@Module({
+  imports: [],
+  controllers: [AppController],
+  providers: [AppService],
+})
+export class AppModule {}
+
+// 우리가 하는 모든걸 import할거야!
+// ...api,, appmodule에 import
+// 인증서비스도 여기에
+// appModule은 너의 어플리케이션을 만들기 위해 이용하는 것!
